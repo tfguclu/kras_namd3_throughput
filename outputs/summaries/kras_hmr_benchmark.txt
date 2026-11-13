@@ -1,0 +1,27 @@
+# KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3
+# KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3_2
+# KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3_3
+
+--- rep1: 10 log(s), 14990 timing records (TIMING)
+  ns/day  mean 495.8  median 495.7  sd 7.7  min 469.4  max 515.4
+  5th-95th percentile 485.1 - 507.5
+  approx 10.10 us simulated, 20.4 d of GPU time at the median rate
+  Benchmark time records: 492.1 ns/day (n=60)
+
+--- rep2: 10 log(s), 14990 timing records (TIMING)
+  ns/day  mean 495.0  median 493.4  sd 6.9  min 469.4  max 512.4
+  5th-95th percentile 485.4 - 506.4
+  approx 10.10 us simulated, 20.5 d of GPU time at the median rate
+  Benchmark time records: 492.1 ns/day (n=60)
+
+--- rep3: 10 log(s), 14990 timing records (TIMING)
+  ns/day  mean 494.2  median 493.5  sd 6.5  min 409.4  max 509.3
+  5th-95th percentile 485.4 - 504.4
+  approx 10.10 us simulated, 20.5 d of GPU time at the median rate
+  Benchmark time records: 488.0 ns/day (n=60)
+
+=== pooled over 3 replicates, 44970 records
+  ns/day  mean 495.0  median 494.0  sd 7.1
+  5th-95th percentile 485.3 - 506.2
+
+wrote fig_throughput.pdf

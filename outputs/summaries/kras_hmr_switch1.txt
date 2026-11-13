@@ -1,0 +1,39 @@
+# rep1: per-frame data read from raw/kras_hmr_switch1/rep1.dat
+# rep2: per-frame data read from raw/kras_hmr_switch1/rep2.dat
+# rep3: per-frame data read from raw/kras_hmr_switch1/rep3.dat
+
+--- rep1: 10000 frames, 9999 ns
+  Thr35 occupancy 66.1%, longest excursion 3383 ns
+  first sustained exit 6617 ns; 1 in total; no return
+  CN==6 99.9%, waters 2.34, Mg-to-site 1.78 A
+    SER17-OG    2.084 +/- 0.090 A   occupancy 100.0%
+    THR35-OG1   2.134 +/- 0.106 A   occupancy  66.1%
+    GTP-O2B     1.853 +/- 0.049 A   occupancy 100.0%
+    GTP-O2G     1.787 +/- 0.038 A   occupancy 100.0%
+  cis 89.96, trans 172.34 deg
+  CV mean 32.8 max 145.4 deg, closed 81.1%, open 2.2%
+
+--- rep2: 10000 frames, 9999 ns
+  Thr35 occupancy 71.2%, longest excursion 2871 ns
+  first sustained exit 7129 ns; 1 in total; no return
+  CN==6 99.9%, waters 2.29, Mg-to-site 1.78 A
+    SER17-OG    2.080 +/- 0.088 A   occupancy 100.0%
+    THR35-OG1   2.134 +/- 0.103 A   occupancy  71.2%
+    GTP-O2B     1.854 +/- 0.049 A   occupancy 100.0%
+    GTP-O2G     1.785 +/- 0.037 A   occupancy 100.0%
+  cis 89.96, trans 172.28 deg
+  CV mean 30.2 max 118.1 deg, closed 83.5%, open 0.7%
+
+--- rep3: 10000 frames, 9999 ns
+  Thr35 occupancy 7.8%, longest excursion 9219 ns
+  first sustained exit 781 ns; 1 in total; no return
+  CN==6 100.0%, waters 2.92, Mg-to-site 1.79 A
+    SER17-OG    2.098 +/- 0.094 A   occupancy 100.0%
+    THR35-OG1   2.110 +/- 0.097 A   occupancy   7.8%
+    GTP-O2B     1.858 +/- 0.049 A   occupancy 100.0%
+    GTP-O2G     1.793 +/- 0.039 A   occupancy 100.0%
+  cis 89.96, trans 173.20 deg
+  CV mean 64.7 max 151.8 deg, closed 22.3%, open 21.4%
+
+wrote fig_mg_shell.pdf
+wrote fig_switch1.pdf

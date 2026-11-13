@@ -1,0 +1,55 @@
+# rep1: per-frame data read from raw/kras_pme_mg/rep1.dat
+# rep2: per-frame data read from raw/kras_pme_mg/rep2.dat
+# rep3: per-frame data read from raw/kras_pme_mg/rep3.dat
+
+=== Mg coordination
+--- rep1: 1000 frames, 100 ns
+  CN mean 6.000, CN==6 in 100.0% of frames, waters 2.00
+    SER17-OG    2.089 +/- 0.089 A   occupancy 100.0%
+    THR35-OG1   2.113 +/- 0.099 A   occupancy 100.0%
+    GTP-O2B     1.850 +/- 0.046 A   occupancy 100.0%
+    GTP-O2G     1.784 +/- 0.036 A   occupancy 100.0%
+  Mg to nearest protein/GTP oxygen 1.780 A (max 1.872)
+  cis 89.93 +/- 0.09, trans 172.35 +/- 2.26 deg
+
+--- rep2: 1000 frames, 100 ns
+  CN mean 5.999, CN==6 in 99.9% of frames, waters 2.00
+    SER17-OG    2.081 +/- 0.092 A   occupancy 100.0%
+    THR35-OG1   2.132 +/- 0.107 A   occupancy  99.9%
+    GTP-O2B     1.841 +/- 0.045 A   occupancy 100.0%
+    GTP-O2G     1.784 +/- 0.036 A   occupancy 100.0%
+  Mg to nearest protein/GTP oxygen 1.779 A (max 1.881)
+  cis 89.95 +/- 0.13, trans 171.96 +/- 2.26 deg
+
+--- rep3: 1000 frames, 100 ns
+  CN mean 5.999, CN==6 in 99.9% of frames, waters 2.00
+    SER17-OG    2.075 +/- 0.086 A   occupancy 100.0%
+    THR35-OG1   2.138 +/- 0.106 A   occupancy  99.9%
+    GTP-O2B     1.852 +/- 0.048 A   occupancy 100.0%
+    GTP-O2G     1.785 +/- 0.036 A   occupancy 100.0%
+  Mg to nearest protein/GTP oxygen 1.782 A (max 1.894)
+  cis 89.96 +/- 0.11, trans 172.57 +/- 2.19 deg
+
+=== throughput
+--- rep1: step5_production_100ns_4pme.log, 9999 timing records
+  ns/day  mean 252.6  median 252.8  sd 1.2  min 246.5  max 256.2
+  100.0 ns simulated in 0:09:30 (d:hh:mm)
+  effective 252.6 ns/day end to end
+  Benchmark time records: 259.2 ns/day (n=6)
+
+--- rep2: step5_production_100ns_4pme.log, 9999 timing records
+  ns/day  mean 255.5  median 255.2  sd 2.2  min 246.4  max 261.9
+  100.0 ns simulated in 0:09:24 (d:hh:mm)
+  effective 255.4 ns/day end to end
+  Benchmark time records: 264.1 ns/day (n=6)
+
+--- rep3: step5_production_100ns_4pme.log, 9999 timing records
+  ns/day  mean 253.4  median 253.6  sd 1.6  min 245.1  max 257.5
+  100.0 ns simulated in 0:09:28 (d:hh:mm)
+  effective 253.3 ns/day end to end
+  Benchmark time records: 258.4 ns/day (n=6)
+
+pooled over 3 replicates, 29997 records: median 253.7 ns/day, 5th-95th 250.8 - 258.1
+
+wrote fig_pme_mg_shell.pdf
+wrote fig_pme_throughput.pdf

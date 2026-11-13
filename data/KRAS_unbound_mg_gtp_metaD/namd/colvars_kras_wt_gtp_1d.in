@@ -1,0 +1,51 @@
+# KRAS-WT-GTP 1D well-tempered metadynamics CV for NAMD3/Colvars
+# Switch I angle ONLY. No GTP distance, no walls.
+#
+# NAMD Colvars uses Angstrom, degrees, and kcal/mol.
+#
+# Atom mapping (step3_input PSF/PDB):
+#   angle a = THR35 CA (530), GLN25 CA (372, vertex), SER17 CA (244)
+#
+# Initial value from step3_input.pdb: kras_angle_a = 20.83 degrees (closed SW-I)
+#
+# NOTE: width sets the PMF/free-energy grid bin (fine, 1 deg).
+#       gaussianSigmas sets the Gaussian width (11.459 deg = 0.2 rad).
+#       These are decoupled on purpose: fine grid, unchanged bias.
+
+colvarsTrajFrequency    5000
+colvarsRestartFrequency 50000
+
+colvar {
+  name kras_angle_a
+
+  width 1.0
+  lowerBoundary 0.0
+  upperBoundary 180.0
+
+  angle {
+    group1 { atomNumbers 530 }   # THR35 CA
+    group2 { atomNumbers 372 }   # GLN25 CA (vertex)
+    group3 { atomNumbers 244 }   # SER17 CA
+  }
+}
+
+metadynamics {
+  name kras_1d_wtmeta
+  colvars kras_angle_a
+
+  # PLUMED HEIGHT=1.2 kJ/mol -> 0.2868 kcal/mol.
+  hillWeight 0.2868
+
+  # newHillFrequency 1000 x 2 fs = 2 ps per hill.
+  newHillFrequency 1000
+
+  # SIGMA=0.2 rad -> 11.459 degrees (Gaussian width, independent of grid).
+  gaussianSigmas 11.459
+
+  # Biasfactor = 15 at T = 310 K -> DeltaT = (15-1)*310 = 4340 K.
+  wellTempered on
+  biasTemperature 4340.0
+
+  writeFreeEnergyFile on
+  writeHillsTrajectory on
+}

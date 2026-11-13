@@ -1,0 +1,13 @@
+# trajectories and large binaries are not tracked
+*.dcd
+*.restart.*
+*.vel
+!data/KRAS_unbound_mg_gtp_1/namd/step4_equilibration.vel
+*.BAK
+*.old
+slurm-*.out
+data/**/bio_cache/
+__pycache__/
+.DS_Store
+# figures are regenerated locally, not distributed
+outputs/figures/

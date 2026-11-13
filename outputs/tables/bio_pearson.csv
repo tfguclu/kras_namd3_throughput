@@ -1,0 +1,13 @@
+property,statistic,baseline_vs_metaD,baseline_vs_HMR,metaD_vs_HMR
+helix,mean,0.989,0.993,0.988
+helix,sd,0.790,0.779,0.780
+strand,mean,0.983,0.989,0.998
+strand,sd,0.844,0.858,0.950
+coil,mean,0.975,0.984,0.986
+coil,sd,0.814,0.811,0.861
+lddt,mean,0.878,0.939,0.961
+lddt,sd,0.724,0.729,0.938
+hbond,mean,0.998,0.999,0.998
+hbond,sd,0.988,0.993,0.992
+rsa,mean,0.972,0.985,0.985
+rsa,sd,0.852,0.862,0.942

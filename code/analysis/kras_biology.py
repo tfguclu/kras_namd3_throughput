@@ -370,7 +370,7 @@ def export_raw(arm, rep, D):
 
 
 def load_raw(stem):
-    res = np.loadtxt(stem + "_residues.dat", dtype=str, ndmin=2)
+    res = np.loadtxt(stem + "_residues.dat", dtype=str, ndmin=2, skiprows=1)
     ss, frames = [], []
     with gzip.open(stem + "_stride.dat.gz", "rt") as fh:
         for line in fh:

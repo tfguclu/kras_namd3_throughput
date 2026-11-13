@@ -66,9 +66,9 @@ Figure files are written to `outputs/figures/` when the scripts are run.
 | Fig. 3 | `fig_baseline_throughput.png` | `kras_baseline_all.py` | logs + `raw/kras_baseline_all/` |
 | Fig. 4 | `fig_cpu_sweep.png` | `kras_cpu_sweep.py` | logs |
 | Fig. 5, Table 1 | `fig_throughput.png` | `kras_hmr_benchmark.py` | logs |
-| Table 2 | wall-clock per chained job | `kras_hmr_walltime.py` | logs |
-| Table 4 (PME 4) | PME order 4 Mg shell | `kras_pme_mg.py` | logs + `raw/kras_pme_mg/` |
-| Figs. 6, 7; Tables 4, 5 | `fig_mg_shell.png`, `fig_switch1.png` | `kras_hmr_switch1.py` | `raw/kras_hmr_switch1/` |
+| Tables 2, 3 | wall-clock per chained job | `kras_hmr_walltime.py` | logs |
+| Table 5 (PME 4) | PME order 4 Mg shell | `kras_pme_mg.py` | logs + `raw/kras_pme_mg/` |
+| Figs. 6, 7; Tables 5, 6 | `fig_mg_shell.png`, `fig_switch1.png` | `kras_hmr_switch1.py` | `raw/kras_hmr_switch1/` |
 | Fig. 8 | `fig_metad.png` | `kras_metad_summary.py` | logs + `*.colvars.traj` |
 | Fig. 9 | `fig_biology.png`, `outputs/tables/bio_*.csv` | `kras_biology.py --plot` | `raw/kras_biology/` |
 | – | Mg²⁺ octahedral geometry | `mg_coord.py` | trajectory (writes `mg_coord_*.dat`) |

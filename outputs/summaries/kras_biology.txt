@@ -1,5 +1,4 @@
-wrote bio_per_residue.csv, bio_summary.csv, bio_pearson.csv
-  baseline: 4 replicates, 6568 frames
-  metaD: 3 replicates, 4800 frames
-  HMR: 3 replicates, 30000 frames
-wrote fig_biology (pdf|png)
+Traceback (most recent call last):
+  File "/Users/tfguclu/kras_namd3_throughput/code/analysis/kras_biology.py", line 49, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

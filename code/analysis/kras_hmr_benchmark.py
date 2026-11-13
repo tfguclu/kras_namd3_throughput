@@ -71,7 +71,9 @@ def order(path):
 
 
 def read_logs(directory):
-    files = sorted(glob.glob(os.path.join(directory, LOG_GLOB)), key=order)
+    files = sorted((f for f in glob.glob(os.path.join(directory, LOG_GLOB))
+                    if not f.endswith("_HMR.log")),   # shared 100 ns benchmark copy, not production
+                   key=order)
     if not files:
         raise SystemExit(f"no log matched {LOG_GLOB} in {directory}")
 

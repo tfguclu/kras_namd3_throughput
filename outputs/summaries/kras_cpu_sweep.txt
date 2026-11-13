@@ -1,14 +1,4 @@
-# KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_0: skipped (GPU-resident off): step5_production_gpuresoff_wgpu_20cpu.log
-=== baseline  (KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_0)
-    4 CPU     30 records  mean   147.3  sd   0.4  median   147.3 ns/day
-    8 CPU     30 records  mean   147.0  sd   0.4  median   147.1 ns/day
-   16 CPU     30 records  mean   146.5  sd   0.3  median   146.5 ns/day
-   20 CPU     32 records  mean   154.5  sd   0.1  median   154.5 ns/day
-
-=== pairlist auto  (KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_1)
-    4 CPU     42 records  mean   203.8  sd   0.5  median   203.9 ns/day
-    8 CPU     42 records  mean   205.6  sd   0.5  median   205.6 ns/day
-   16 CPU     42 records  mean   205.7  sd   0.5  median   205.7 ns/day
-   20 CPU     42 records  mean   206.5  sd   0.6  median   206.4 ns/day
-
-wrote fig_cpu_sweep.pdf
+Traceback (most recent call last):
+  File "/Users/tfguclu/kras_namd3_throughput/code/analysis/kras_cpu_sweep.py", line 26, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

@@ -1,7 +1,6 @@
 === rep1  (KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3)
 piece                              steps   sim (ns)  wall d:hh:mm   ns/day
 step5_production.log         300,000,000     1200.0       2:09:57    497.1
-step5_production_HMR.log      25,000,000      100.0       0:04:55    488.1
 step5_production_1.log       300,000,000     1200.0       2:11:06    487.3
 step5_production_2.log       300,000,000     1200.0       2:10:10    495.1
 step5_production_3.log       300,000,000     1200.0       2:10:00    496.6
@@ -10,12 +9,11 @@ step5_production_5.log       300,000,000     1200.0       2:09:03    504.8
 step5_production_6.log       300,000,000     1200.0       2:08:52    506.5
 step5_production_7.log       300,000,000     1200.0       2:09:13    503.4
 step5_production_8.log       100,000,000      400.0       0:19:07    502.2
-TOTAL                       2,525,000,000    10100.0      20:05:28    499.3
+TOTAL                       2,500,000,000    10000.0      20:00:33    499.4
 
 === rep2  (KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3_2)
 piece                              steps   sim (ns)  wall d:hh:mm   ns/day
 step5_production.log         300,000,000     1200.0       2:10:34    491.7
-step5_production_HMR.log      25,000,000      100.0       0:04:55    488.1
 step5_production_1.log       300,000,000     1200.0       2:10:42    490.6
 step5_production_2.log       300,000,000     1200.0       2:10:24    493.1
 step5_production_3.log       300,000,000     1200.0       2:09:47    498.4
@@ -24,12 +22,11 @@ step5_production_5.log       300,000,000     1200.0       2:09:13    503.4
 step5_production_6.log       300,000,000     1200.0       2:09:03    504.8
 step5_production_7.log       300,000,000     1200.0       2:09:25    501.6
 step5_production_8.log       100,000,000      400.0       0:19:11    500.4
-TOTAL                       2,525,000,000    10100.0      20:06:34    498.2
+TOTAL                       2,500,000,000    10000.0      20:01:39    498.3
 
 === rep3  (KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_3_3)
 piece                              steps   sim (ns)  wall d:hh:mm   ns/day
 step5_production.log         300,000,000     1200.0       2:10:20    493.8
-step5_production_HMR.log      25,000,000      100.0       0:04:55    488.1
 step5_production_1.log       300,000,000     1200.0       2:10:28    492.6
 step5_production_2.log       300,000,000     1200.0       2:10:33    491.9
 step5_production_3.log       300,000,000     1200.0       2:10:18    493.9
@@ -38,11 +35,11 @@ step5_production_5.log       300,000,000     1200.0       2:09:14    503.2
 step5_production_6.log       300,000,000     1200.0       2:09:37    499.9
 step5_production_7.log       300,000,000     1200.0       2:09:44    498.9
 step5_production_8.log       100,000,000      400.0       0:19:18    497.5
-TOTAL                       2,525,000,000    10100.0      20:07:43    497.0
+TOTAL                       2,500,000,000    10000.0      20:02:48    497.1
 
 === all replicates
-  simulated 30.30 µs over 60:19:45 of GPU wall time
-  effective 498.2 ns/day including restart overhead
+  simulated 30.00 µs over 60:05:00 of GPU wall time
+  effective 498.3 ns/day including restart overhead
 
   * wall time taken from the last TIMING record (no WallClock line);
     this is a lower bound on the piece's true wall time.

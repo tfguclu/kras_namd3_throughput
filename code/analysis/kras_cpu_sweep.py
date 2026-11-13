@@ -40,6 +40,9 @@ except ImportError:
 SWEEP_DIRS = {"KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_0": "baseline",
               "KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_1": "default pairlist"}
 LOG_GLOB = "step5_production*cpu.log"
+# no GPU-resident benchmark exists at 20 cores for the baseline; its 20-core point
+# is taken from the GPU-resident production log of the same configuration
+EXTRA = {"KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_0": ("step5_production.log", 20)}
 DROP_FIRST = 1
 
 COL_W = 3.4
@@ -60,13 +63,13 @@ RE_PERF = re.compile(r"^PERFORMANCE:\s+\d+\s+averaging\s+([\d.]+)\s+ns/day",
 RE_CPU = re.compile(r"_(\d+)cpu\.log$")
 
 
-def parse(path):
+def parse(path, ncpu=None):
     name = os.path.basename(path)
     m = RE_CPU.search(name)
-    ncpu = int(m.group(1)) if m else None
-    resident = "gpuresoff" not in name.lower()
-
+    ncpu = ncpu or (int(m.group(1)) if m else None)
     text = open(path, errors="replace").read()
+    # GPU-resident only if NAMD was launched with --GPUresident on
+    resident = "Running with GPU-resident mode" in text
     rates = RE_TIMING.findall(text)
     kind = "TIMING"
     if not rates:
@@ -115,6 +118,11 @@ if __name__ == "__main__":
             continue
 
         runs = [r for r in (parse(f) for f in files) if r]
+        if d in EXTRA:
+            f, n = EXTRA[d]
+            r = parse(os.path.join(d, f), n)
+            if r and not any(x["ncpu"] == n and x["resident"] for x in runs):
+                runs.append(r)
         for r in runs:
             if not r["resident"]:
                 print(f"# {d}: skipped (GPU-resident off): {r['name']}")

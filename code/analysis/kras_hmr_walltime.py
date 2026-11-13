@@ -72,7 +72,9 @@ if __name__ == "__main__":
     grand_wall, grand_steps = 0.0, 0
 
     for d, lab in DIRS.items():
-        files = sorted(glob.glob(os.path.join(d, LOG_GLOB)), key=order)
+        files = sorted((f for f in glob.glob(os.path.join(d, LOG_GLOB))
+                        if not f.endswith("_HMR.log")),   # shared 100 ns benchmark copy
+                       key=order)
         if not files:
             print(f"{lab} ({d}): no logs matched {LOG_GLOB}\n")
             continue

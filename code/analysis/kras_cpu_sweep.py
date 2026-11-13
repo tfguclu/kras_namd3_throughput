@@ -38,7 +38,7 @@ except ImportError:
 # ---- settings ---------------------------------------------------------------
 # one entry per optimization stage; each gets its own line in the figure
 SWEEP_DIRS = {"KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_0": "baseline",
-              "KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_1": "pairlist auto"}
+              "KRAS_unbound_benchmark_phys/KRAS_unbound_mg_gtp_1/namd_1": "default pairlist"}
 LOG_GLOB = "step5_production*cpu.log"
 DROP_FIRST = 1
 
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots(figsize=(COL_W, 2.5), constrained_layout=True)
     lo_all, hi_all = [], []
     for k, (lab, runs) in enumerate(stages):
-        x = np.array([pos[r["ncpu"]] for r in runs], dtype=float)
+        x = np.array([r["ncpu"] for r in runs], dtype=float)
         y = np.array([r["rate"].mean() for r in runs])
         e = np.array([r["rate"].std() for r in runs])
         ls, mk = STYLES[k % len(STYLES)]
@@ -152,9 +152,9 @@ if __name__ == "__main__":
         lo_all.append((y - e).min())
         hi_all.append((y + e).max())
 
-    ax.set_xticks(range(len(cores)))
+    ax.set_xticks(cores)
     ax.set_xticklabels([str(n) for n in cores])
-    ax.set_xlim(-0.4, len(cores) - 0.6)
+    ax.set_xlim(0, max(cores) + 2)
 
     ylo = np.floor((min(lo_all) - 2) / 10.0) * 10
     yhi = np.ceil((max(hi_all) + 2) / 10.0) * 10

@@ -70,6 +70,7 @@ ARMS = {
 }
 ARM_ORDER = ["baseline", "metaD", "HMR"]
 ARM_COLOR = {"baseline": "#111111", "metaD": "#E00000", "HMR": "#0177C1"}
+ARM_LABEL = {"baseline": "reference", "metaD": "metadynamics", "HMR": "HMR"}   # figure labels
 
 STRIDE = {"baseline": 10, "metaD": 10, "HMR": 1}   # one analysed frame per ns:
                          # baseline/metaD save every 100 ps, HMR every 1 ns
@@ -496,7 +497,7 @@ def plot(prof, pairs, R, sel):
         unit = 0.1 if hi - lo < 3 else 1.0
         lo_t = np.floor(lo / unit + 1e-9) * unit
         hi_t = np.ceil(hi / unit - 1e-9) * unit
-        step = next(m * unit for m in (1, 2, 5, 10, 20) if (hi_t - lo_t) / (m * unit) <= 5)
+        step = next(m * unit for m in (1, 2, 5, 10, 20) if (hi_t - lo_t) / (m * unit) <= 4)
         lo_t = np.floor(lo_t / step + 1e-9) * step
         hi_t = np.ceil(hi_t / step - 1e-9) * step
         ticks = np.arange(lo_t, hi_t + step / 2, step)
@@ -517,14 +518,14 @@ def plot(prof, pairs, R, sel):
             ax.xaxis.set_major_formatter(fmt); ax.yaxis.set_major_formatter(fmt)
             ax.text(0.04, 0.96, f"$\\it{{R}}$ = {R[(k, 0, a, b)]:.2f}\n"
                                 f"$\\it{{R}}_{{\\sigma}}$ = {R[(k, 1, a, b)]:.2f}",
-                    transform=ax.transAxes, ha="left", va="top", fontsize=10,
+                    transform=ax.transAxes, ha="left", va="top", fontsize=12,
                     bbox=dict(facecolor="white", edgecolor="none", pad=1.0, alpha=0.8))
-            ax.set_xlabel(a, fontsize=10, color=ARM_COLOR[a])
-            ax.set_ylabel(b, fontsize=10, color=ARM_COLOR[b])
-            ax.tick_params(labelsize=9)
+            ax.set_xlabel(ARM_LABEL[a], fontsize=12.5, color=ARM_COLOR[a])
+            ax.set_ylabel(ARM_LABEL[b], fontsize=12.5, color=ARM_COLOR[b])
+            ax.tick_params(labelsize=11)
             if j == 0:
-                ax.annotate(labels[k], xy=(-0.42, 0.5), xycoords="axes fraction",
-                            rotation=90, ha="center", va="center", fontsize=11,
+                ax.annotate(labels[k], xy=(-0.50, 0.5), xycoords="axes fraction",
+                            rotation=90, ha="center", va="center", fontsize=13,
                             fontweight="bold")
     for ext in ("pdf", "png"):
         fig.savefig(f"fig_biology.{ext}", dpi=300, bbox_inches="tight")

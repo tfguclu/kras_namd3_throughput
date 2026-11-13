@@ -51,6 +51,10 @@ TRANS_MIN = 135.0         # O-Mg-O angles above this are trans
 CLOSED_MAX, OPEN_MIN = 45.0, 90.0    # CV state thresholds, degrees
 
 LIGANDS = ["SER17-OG", "THR35-OG1", "GTP-O2B", "GTP-O2G"]
+LIG_LABEL = {"SER17-OG": "Ser17-OG", "THR35-OG1": "Thr35-OG1",
+             "GTP-O2B": "GTP O2B", "GTP-O2G": "GTP O2G"}
+REF_COLOR = "0.35"
+REF_RAW = os.path.join("raw", "kras_baseline_all", "rep{}.dat")   # reference arm
 COLORS = ["#1f6fb4", "#c8571f", "#3f8f5c"]
 
 COL_W = 3.4          # IEEE single-column width, inches
@@ -259,7 +263,35 @@ def density(ax, x, color, lo=None, hi=None, fill=False, label=None):
         ax.fill_between(grid, y, color=color, alpha=0.15, lw=0)
 
 
-def figure_shell(reps):
+def load_reference():
+    """Pooled per-frame shell data of the four reference replicates (2 fs)."""
+    out = None
+    for k in range(1, 5):
+        path = REF_RAW.format(k)
+        if not os.path.isfile(path):
+            continue
+        r = rawio.load(path)
+        if out is None:
+            out = {"dist": {l: [] for l in LIGANDS}, "site": [], "cis": [], "trans": []}
+        for l in LIGANDS:
+            out["dist"][l].append(r["dist"][l])
+        for key in ("site", "cis", "trans"):
+            out[key].append(r[key])
+    if out is None:
+        print("# reference raw data not found; Fig. 6 drawn without it")
+        return None
+    out["dist"] = {l: np.concatenate(v) for l, v in out["dist"].items()}
+    for key in ("site", "cis", "trans"):
+        out[key] = np.concatenate(out[key])
+    return out
+
+
+def ref_density(ax, x, lo, hi):
+    density(ax, x, REF_COLOR, lo=lo, hi=hi)
+    ax.lines[-1].set_linestyle("--")
+
+
+def figure_shell(reps, ref=None):
     fig = plt.figure(figsize=(COL_W, 6.4), constrained_layout=True)
     gs = fig.add_gridspec(3, 2)
 
@@ -269,7 +301,10 @@ def figure_shell(reps):
             x = r["dist"][lig]
             density(ax, x[x < MG_SHELL_CUT], COLORS[i], lo=1.6, hi=2.6,
                     fill=True)
-        ax.set_xlabel(f"Mg\u2013O, {lig} (\u00c5)", fontsize=8.5)
+        if ref is not None:
+            x = ref["dist"][lig]
+            ref_density(ax, x[x < MG_SHELL_CUT], 1.6, 2.6)
+        ax.set_xlabel(f"Mg\u2013O, {LIG_LABEL[lig]} (\u00c5)", fontsize=8.5)
         ax.set_ylabel("density", fontsize=8.5)
         ax.set_xlim(1.6, 2.6)
         ax.set_xticks([1.6, 1.8, 2.0, 2.2, 2.4, 2.6])
@@ -278,6 +313,8 @@ def figure_shell(reps):
     ax = fig.add_subplot(gs[2, 0])
     for i, r in enumerate(reps):
         density(ax, r["site"], COLORS[i], lo=1.6, hi=2.2, fill=True)
+    if ref is not None:
+        ref_density(ax, ref["site"], 1.6, 2.2)
     ax.set_xlabel("Mg to nearest\nprotein/GTP oxygen (\u00c5)", fontsize=8.5)
     ax.set_ylabel("density", fontsize=8.5)
     ax.set_xlim(1.6, 2.2)
@@ -290,6 +327,9 @@ def figure_shell(reps):
     for i, r in enumerate(reps):
         density(axc, r["cis"], COLORS[i], lo=88.0, hi=92.0, fill=True)
         density(axt, r["trans"], COLORS[i], lo=160.0, hi=180.0, fill=True)
+    if ref is not None:
+        ref_density(axc, ref["cis"], 88.0, 92.0)
+        ref_density(axt, ref["trans"], 160.0, 180.0)
     axc.axvline(90, color="0.6", lw=0.5, ls=":")
     axt.axvline(180, color="0.6", lw=0.5, ls=":")
     axc.set_xlim(88, 92)
@@ -305,9 +345,13 @@ def figure_shell(reps):
     axc.set_xlabel("O\u2013Mg\u2013O (\u00b0)", fontsize=8.5)
     axc.xaxis.set_label_coords(1.15, -0.16)
 
-    fig.legend(handles=[Line2D([], [], color=COLORS[i], lw=1.6,
-                               label=r["label"]) for i, r in enumerate(reps)],
-               loc="outside lower center", ncol=len(reps), fontsize=8.5)
+    handles = [Line2D([], [], color=COLORS[i], lw=1.6, label=f"HMR {r['label']}")
+               for i, r in enumerate(reps)]
+    if ref is not None:
+        handles.append(Line2D([], [], color=REF_COLOR, lw=1.2, ls="--",
+                              label="reference"))
+    fig.legend(handles=handles, loc="outside lower center",
+               ncol=len(handles), fontsize=8, handlelength=1.6, columnspacing=1.0)
     for ext in ("pdf", "png"):
         fig.savefig(f"fig_mg_shell.{ext}", dpi=300, bbox_inches="tight")
     plt.close(fig)
@@ -392,5 +436,5 @@ if __name__ == "__main__":
     for r in reps:
         summarise(r)
 
-    figure_shell(reps)
+    figure_shell(reps, load_reference())
     figure_switch1(reps)
